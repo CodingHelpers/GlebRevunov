@@ -4,7 +4,7 @@ public class Matrix {
     // Конструктор, создающий еденичную матрицу
     Matrix(int _size) {
         this.size = _size;
-        matrix = new int[size][size];
+        matrix = new long[size][size];
         for (int i = 0; i < size; i++) {
             matrix[i][i] = 1;
         }
@@ -25,24 +25,51 @@ public class Matrix {
         Matrix new_matrix = new Matrix(size);
 
         // Перемножаем матрицы
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                int c_ij = 0;
-                for(int k = 0; k < size; k++) {
-                    c_ij += getElement(i, k) + b.getElement(k, j);
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                long temp = 0;
+                for(int inner = 0; inner < size; inner++) {
+                    temp += getElement(row, inner) * b.getElement(inner, col);
                 }
-                new_matrix.setElement(i, j, c_ij);
+                new_matrix.setElement(row, col, temp);
             }
         }
 
         return  new_matrix;
     }
 
-    public void setElement (int row, int collumn, int value) {
+    public void doSortRows() {
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = i; j < size; j++) {
+                if(rowSum(i) < rowSum(j)) {
+                    swapRows(i, j);
+                }
+            }
+        }
+    }
+
+    long rowSum(int row) {
+        long sum = 0;
+        for(int i = 0; i < size; i++) {
+            sum += matrix[row][i];
+        }
+        return sum;
+    }
+
+    void swapRows(int row1, int row2) {
+        long temp;
+        for(int i = 0; i < size; i++) {
+            temp = matrix[row1][i];
+            matrix[row1][i] = matrix[row2][i];
+            matrix[row2][i] = temp;
+        }
+    }
+
+    public void setElement (int row, int collumn, long value) {
         matrix[row][collumn] = value;
     }
 
-    public int getElement (int row, int collumn) {
+    public long getElement (int row, int collumn) {
         return matrix[row][collumn];
     }
 
@@ -58,7 +85,7 @@ public class Matrix {
     }
 
     // Приватные поля
-    private int     size;
-    private int[][] matrix;
+    private int      size;
+    private long[][] matrix;
 
 }
