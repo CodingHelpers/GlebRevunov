@@ -8,15 +8,19 @@ public class Main {
         matrix.setElement(1,1,0);
         matrix.setElement(0,1,1);
 
+        /// Создаем матрицу, в которую будет записан результат вычислений
+        Matrix result = new Matrix(2);
+        result = matrix;
+
         /// Первая степень уже есть, просто выводим ее
         System.out.println("Power " + 1);
-        System.out.println(matrix.toString());
+        System.out.println(result.toString());
 
         /// Вычисляем и выводим остальные степени
         for(int i = 2; i <= 10; i++) {
-            matrix = matrix.product(matrix);
+            result = result.product(matrix);
             System.out.println("Power " + i);
-            System.out.println(matrix.toString());
+            System.out.println(result.toString());
         }
 
         /// Создаем еще одну матрицу
