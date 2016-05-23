@@ -8,7 +8,7 @@ public class Main {
         {
             SortedIntegerList list = new SortedIntegerList(false);
             list = fillList(list, false, false);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Проверяем список
             System.out.println("0...9, no duplicates: " + (isAscending(list) ? "SUCCESS" : "FAILURE"));
@@ -18,7 +18,7 @@ public class Main {
         {
             SortedIntegerList list = new SortedIntegerList(true);
             list = fillList(list, false, false);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Проверяем список
             System.out.println("0...9, duplicates: " + (isAscending(list) ? "SUCCESS" : "FAILURE"));
@@ -28,7 +28,7 @@ public class Main {
         {
             SortedIntegerList list = new SortedIntegerList(false);
             list = fillList(list, true, false);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Проверяем список
             System.out.println("9...0, no duplicates: " + (isAscending(list) ? "SUCCESS" : "FAILURE"));
@@ -38,7 +38,7 @@ public class Main {
         {
             SortedIntegerList list = new SortedIntegerList(true);
             list = fillList(list, true, false);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Проверяем список
             System.out.println("9...0, duplicates: " + (isAscending(list) ? "SUCCESS" : "FAILURE"));
@@ -48,7 +48,7 @@ public class Main {
         {
             SortedIntegerList list = new SortedIntegerList(false);
             list = fillList(list, false, true);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Проверяем список
             boolean pass = isAscending(list);
@@ -64,10 +64,10 @@ public class Main {
         {
             SortedIntegerList list = new SortedIntegerList(true);
             list = fillList(list, false, true);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Проверяем список
-            boolean pass = isAscending(list)
+            boolean pass = isAscending(list);
 
             if(list.size() != 20) {
                 pass = false;
@@ -80,11 +80,11 @@ public class Main {
         {
             SortedIntegerList list = new SortedIntegerList(false);
             list = fillList(list, false, false);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Удаляем 5
             list.remove(5);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Проверяем список
             boolean pass = true;
@@ -101,14 +101,14 @@ public class Main {
         {
             SortedIntegerList list = new SortedIntegerList(true);
             list = fillList(list, false, false);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Удаляем 5
             list.remove(5);
-            //System.out.println(list.toString());
+            System.out.println(list.toString());
 
             // Проверяем список
-            System.out.println("delete, duplicates: " + (!contains(list 5) ? "SUCCESS" : "FAILURE"));
+            System.out.println("delete, duplicates: " + (!contains(list, 5) ? "SUCCESS" : "FAILURE"));
         }
 
         // Проверяем метод equals
@@ -117,19 +117,40 @@ public class Main {
             SortedIntegerList list2 = new SortedIntegerList(true);
 
             list1 = fillList(list1, true, false);
-            list1 = fillList(list1, true, false);
+            list2 = fillList(list2, true, false);
 
-            //System.out.println(list1.toString());
-            //System.out.println(list2.toString());
+            System.out.println(list1.toString());
+            System.out.println(list2.toString());
 
             System.out.println("equals: " + (list1.equals(list2) ? "SUCCESS" : "FAILURE"));
 
             list1.remove(5);
 
-            //System.out.println(list1.toString());
-            //System.out.println(list2.toString());
+            System.out.println(list1.toString());
+            System.out.println(list2.toString());
 
             System.out.println("!equals: " + (!list1.equals(list2) ? "SUCCESS" : "FAILURE"));
+        }
+
+        // Проверяем бинарный поиск
+        {
+            SortedIntegerList list1 = new SortedIntegerList(true);
+
+            list1 = fillList(list1, true, false);
+
+            System.out.println(list1.toString());
+
+            if(list1.find(100)) {
+                System.out.println("list1.find(100): CONTAINS");
+            } else {
+                System.out.println("list1.find(100): NO");
+            }
+
+            if(list1.find(5)) {
+                System.out.println("list1.find(5): CONTAINS");
+            } else {
+                System.out.println("list1.find(5): NO");
+            }
         }
 
     }
@@ -151,6 +172,7 @@ public class Main {
                 }
             }
         }
+
         return lst;
     }
 

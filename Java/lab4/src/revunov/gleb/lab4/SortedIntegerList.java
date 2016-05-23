@@ -61,6 +61,22 @@ public class SortedIntegerList {
         return true;
     }
 
+    public boolean find(int num) {
+        int l = -1;
+        int r = list.size();
+        while(l < r - 1) {
+            int m = (l + r) / 2;
+            if(list.get(m) < num) {
+                l = m;
+            } else {
+                r = m;
+            }
+        }
+
+        if(r < list.size() && list.get(r) == num) return true;
+        return false;
+    }
+
     public Integer get(int i) {
         return list.get(i);
     }
