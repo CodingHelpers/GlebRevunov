@@ -3,9 +3,12 @@ package revunov.gleb.lab3.math;
 public class Matrix {
     // Конструктор, создающий нулевую матрицу
     public Matrix(int rows, int cols) {
+        if(cols % 2 != 0) {
+            throw new MatrixException("Количество столбцов должно быть четным");
+        }
         this.rows   = rows;
         this.cols   = cols;
-        this.matrix = new int[rows][cols];
+        this.matrix = new int[rows/2][cols];
     }
 
     public Matrix sum (Matrix b) {
@@ -52,10 +55,17 @@ public class Matrix {
     }
 
     public void setElement (int row, int collumn, int value) {
+        if(row >= rows / 2) {
+            matrix[rows-row-1][collumn] = value;
+            return;
+        }
         matrix[row][collumn] = value;
     }
 
     public int getElement (int row, int collumn) {
+        if(row >= rows / 2) {
+            return matrix[rows-row-1][collumn];
+        }
         return matrix[row][collumn];
     }
 
@@ -71,7 +81,7 @@ public class Matrix {
         String str = "";
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                str += matrix[i][j] + " ";
+                str += getElement(i, j) + " ";
             }
             str += "\n";
         }
