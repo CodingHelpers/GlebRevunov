@@ -101,7 +101,7 @@ public class UsualMatrix implements IMatrix {
         String str = "";
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                str += matrix[i][j] + " ";
+                str += getElement(i, j) + " ";
             }
             str += "\n";
         }

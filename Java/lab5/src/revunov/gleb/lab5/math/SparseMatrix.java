@@ -25,6 +25,10 @@ public class SparseMatrix extends UsualMatrix {
     }
 
     public void setElement(int row, int column, int value) {
+        if(row >= rows / 2) {
+            row = rows - row - 1;
+        }
+
         // Ищем в списках полный  индекс
         Row r = lookupRow(row);
         if(r == null) {
@@ -49,6 +53,10 @@ public class SparseMatrix extends UsualMatrix {
     }
 
     public int getElement(int row, int column) {
+        if(row >= rows / 2) {
+            row = rows - row - 1;
+        }
+
         // Ищем в связных списках нужный нам элемент
         Row r = lookupRow(row);
         if(r == null) {
