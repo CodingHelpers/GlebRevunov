@@ -1,14 +1,14 @@
 package revunov.gleb.lab5;
 
 import revunov.gleb.lab5.math.SparseMatrix;
-import revunov.gleb.lab5.math.SquareMatrix;
 import revunov.gleb.lab5.math.UsualMatrix;
+import revunov.gleb.lab5.math.IMatrix;
 
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        final int matrix_size = 1000;
+        final int matrix_size = 100;
         // Создаем две квадратные матрицы
         UsualMatrix usualMatrix1 = new UsualMatrix(matrix_size, matrix_size);
         UsualMatrix usualMatrix2 = new UsualMatrix(matrix_size, matrix_size);
@@ -52,28 +52,28 @@ public class Main {
             }
         }
 
-        // Сравниваем результаты операций сложения с разными типами матриц
-        Object sum1 = usualMatrix1.sum(usualMatrix2);
-        System.out.println("usual1 + usual2");
-        Object sum2 = usualMatrix1.sum(sparseMatrix2);
-        System.out.println("usual1 + sparse2");
+        // Производим операции сложения
+        IMatrix sum1 = usualMatrix1.sum(usualMatrix2);
+        System.out.println("sum1 = usual1 + usual2");
+        IMatrix sum2 = usualMatrix1.sum(sparseMatrix2);
+        System.out.println("sum2 = usual1 + sparse2");
 
-        if(sum1.equals(sum2)) {
-            System.out.println("+: SUCCESS");
-        } else {
-            System.out.println("+: FAIL");
-        }
+        // Находим разность результатов
+        System.out.println("checksum = sum1 - sum2");
+        IMatrix checksum1 = sum1.diff(sum2);
+        System.out.println("Сумма элементов checksum равна " + checksum1.elements_sum());
 
-        // Сравниваем результаты операций сложения с разными типами матриц
-        Object prod1 = usualMatrix1.product(usualMatrix2);
-        System.out.println("usual1 * usual2");
-        Object prod2 = usualMatrix1.product(sparseMatrix2);
-        System.out.println("usual1 * sparse2");
+        // Проводим операции умножения
+        IMatrix prod1 = usualMatrix1.product(usualMatrix2);
+        System.out.println("prod1 = usual1 * usual2");
+        IMatrix prod2 = usualMatrix1.product(sparseMatrix2);
+        System.out.println("prod2 = usual1 * sparse2");
 
-        if(sum1.equals(sum2)) {
-            System.out.println("*: SUCCESS");
-        } else {
-            System.out.println("*: FAIL");
-        }
+        // Находим разность результатов
+        System.out.println("checksum = prod1 - prod2");
+        IMatrix checksum2 = prod1.diff(prod2);
+        System.out.println("Сумма элементов checksum равна " + checksum2.elements_sum());
+
+
     }
 }

@@ -21,10 +21,10 @@ public class Main {
         }
 
         // Вывод матриц как они хранятся
-        System.out.println(m1.toString());
-        System.out.println(m2.toString());
+        System.out.println("Matrix 1:\n" + m1.toString());
+        System.out.println("Matrix 2:\n" + m2.toString());
 
         Matrix sum = m1.sum(m2);
-        System.out.println(sum.toString());
+        System.out.println("Matrix 1+2:\n" + sum.toString());
     }
 }

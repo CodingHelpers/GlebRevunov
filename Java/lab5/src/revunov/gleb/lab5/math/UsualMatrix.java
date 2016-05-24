@@ -28,6 +28,26 @@ public class UsualMatrix implements IMatrix {
         return result;
     }
 
+    public IMatrix diff (IMatrix b) {
+        // Проверяем, если матрицы разного размера, кидаем исключение
+        if(this.getRows() != b.getRows() || this.getCols() != b.getCols()) {
+            throw new MatrixException("Невозможно сложить матрицы разного размера");
+        }
+
+        // Создаем новую матрицу-результат
+        IMatrix result = new UsualMatrix(rows, cols);
+
+        // Производим сложение матриц
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.setElement(i, j, getElement(i, j) - b.getElement(i, j));
+            }
+        }
+
+        // Возвращаем результат
+        return result;
+    }
+
     public IMatrix product (IMatrix b) {
         // Проверяем, если количество строк матрицы не равно количеству столбцов b
         if(this.getRows() != b.getCols()) {
@@ -49,6 +69,16 @@ public class UsualMatrix implements IMatrix {
         }
 
         return result;
+    }
+
+    public int elements_sum() {
+        int sum = 0;
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                sum += getElement(i, j);
+            }
+        }
+        return sum;
     }
 
     public void setElement (int row, int collumn, int value) {
