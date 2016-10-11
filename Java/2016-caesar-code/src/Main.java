@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
         // Подготовка листа с алфавитом
-        for(char c : "абвгдеёжзиклмнопрстуфхцчшщъыьэюя".toCharArray()) {
+        for(char c : "абвгдеёжзиклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".toCharArray()) {
             ALPHABET.add(c);
         }
 
@@ -58,6 +58,11 @@ public class Main {
 
     private static Character rotate(char c, int key) {
         int originalIndex = ALPHABET.indexOf(c);
+
+        if(originalIndex == -1) {
+            return c;
+        }
+
         int rotatedIndex = (originalIndex + key) % ALPHABET.size();
         return ALPHABET.get(rotatedIndex);
     }
