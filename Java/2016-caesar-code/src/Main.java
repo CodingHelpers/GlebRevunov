@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
+
         System.out.print("Enter input filename: ");
         String filename = sc.nextLine();
         System.out.print("Enter key: ");
@@ -52,12 +52,5 @@ public class Main {
                 System.exit(2);
             }
         });
-    }
-
-    private static void help() {
-        System.out.println(
-                "java Main" + " MODE KEY STRING\n\n" +
-                "Modes: encode, decode\n"
-        );
     }
 }
