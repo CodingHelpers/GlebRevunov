@@ -8,11 +8,13 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        final int matrix_size = 2000;
+        // Преимущества параллельной реализации видны только на больших матрицах
+        // на маленьких вычисления обычным методам занимают меньше времени, чем создание потоков
+        final int matrix_size = 1000;
 
         Random rand = new Random();
 
-        // Создаем разреженную матрицу с зеркальными половинами
+        // Создаем матрицу
         UsualMatrix m = new UsualMatrix(matrix_size, matrix_size);
 
         // Заполняем матрицу
@@ -22,6 +24,7 @@ public class Main {
             }
         }
 
+        // Обычное усножение и замер времени
         System.out.print("Sequential product... ");
         long simpleTime = System.nanoTime();
         IMatrix result = m.product(m);
@@ -30,15 +33,18 @@ public class Main {
 
         ParallelMatrixProduct product = new ParallelMatrixProduct();
 
+        // Параллельное умножение и замер времени
         System.out.print("Parallel product... ");
         long parallelTime = System.nanoTime();
         IMatrix parallelResult = product.parallelMatrixProduct(m, m);
         parallelTime = System.nanoTime() - parallelTime;
         System.out.println("done.");
 
+        // Во сколько раз параллельная реализация быстрее
         double xFaster = simpleTime/(double)parallelTime;
 
-        if(matrix_size < 50) {
+        // Выводим результаты в консоль, если матрица небольшая
+        if(matrix_size < 20) {
             System.out.println("");
             System.out.println("M*M:");
             System.out.println(result.toString());
@@ -50,8 +56,11 @@ public class Main {
             System.out.println("");
         }
 
+        // Проверка на правильность параллельной реализации
+        // (правильность последовательной была доказана в прошлых заданиях)
         System.out.println("Parallel result equals sequential: " + result.equals(parallelResult));
 
+        // Вывод времени и выводов
         System.out.println("Sequential time: " + simpleTime / 1000 + "ms");
         System.out.println("Parallel time:   " + parallelTime / 1000 + "ms");
         System.out.println("Parallel is " + String.format("%.2f", xFaster) + "x faster.");
